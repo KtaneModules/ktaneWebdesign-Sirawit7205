@@ -22,7 +22,7 @@ public class webdesign : MonoBehaviour {
         {"body #content","body #sidebar","#content img.avatar","blockquote#sidebar","blockquote.reply","div.reply","div.avatar","img.reply"}
     };
 
-    private string[] sitename = { "Edison Daily", "Buddymaker", "PNGdrop", "BobIRS", "Cinemax", "Go Team Falcon online", "Stufflocker", "Steel Nexus" };
+    private string[] sitename = { "Edison Daily", "Buddymaker", "PNGdrop", "BobIRS", "Vidhost", "Go Team Falcon online", "Stufflocker", "Steel Nexus" };
     private string[] randomcolor = { "blue", "green", "purple", "yellow", "white", "magenta", "red", "orange", "gray" };
     private string[] colors = { "color: *;", "background: *;", "background-color: *;" };
     private string[] margin = { "margin: 0 auto;", "margin: 2px 4px;", "margin: 1em;", "margin: calc(100vw-640px);", "margin: 25%;", "margin: 80px 40px;", "margin: 4.2em 1.0em;", "margin: auto;", "padding: 4px;",
@@ -175,9 +175,9 @@ public class webdesign : MonoBehaviour {
         if (Random.Range(0, 2) == 1)
         {
             ans *= 2;
-            btn[0].GetComponent<MeshRenderer>().material.color = Color.red;
-            btn[1].GetComponent<MeshRenderer>().material.color = Color.green;
-            btn[2].GetComponent<MeshRenderer>().material.color = Color.blue;
+            btn[0].GetComponent<MeshRenderer>().material.color = new Color32(0x50, 0xF7, 0x36, 0xFF);
+            btn[1].GetComponent<MeshRenderer>().material.color = new Color32(0xF7, 0xA4, 0x20, 0xFF);
+            btn[2].GetComponent<MeshRenderer>().material.color = new Color32(0xEF, 0x2D, 0x2D, 0xFF);
             Debug.LogFormat("[Web design #{0}] Colored buttons: score x2", _moduleId);
         }
         else
