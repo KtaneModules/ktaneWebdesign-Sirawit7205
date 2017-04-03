@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html class="no-js"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Web Design - Keep Talking and Nobody Explodes Module</title>
-    <meta name="viewport" content="initial-scale=1"> 
+    <meta name="viewport" content="initial-scale=1">
 	<link href='https://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -11,6 +11,19 @@
 		code {
 			background-color: #D8DADA;
 		}
+        table.webdesign {
+            margin: 0 auto;
+        }
+        table.webdesign-websites p {
+            margin: 0;
+        }
+        table.webdesign-websites p.threshold {
+            font-weight: bold;
+            margin: .8em 0 .5em;
+        }
+        table.webdesign-websites h4 {
+            margin: .5em 0 .8em;
+        }
 	</style>
 </head>
 <body>
@@ -27,30 +40,30 @@
 				Welcome to web design class. The first rule of web design is: You do not talk about Comic Sans MS.
 				The second rule is: You DO NOT talk about Comic Sans MS. The third rule is: The word "color" is NEVER spelled with a U.
 			</p>
-			
+
 			<ul>
-				<li> A snippet of a CSS file will be displayed on the screen. </li>
-				<li> Based on the information given, you have to Accept (✓), Consider (Δ), or Reject (✗) the code. </li>
+				<li>The module displays a snippet of a CSS file on a screen.</li>
+				<li>Based on the information given, you have to Accept (✓), Consider (Δ), or Reject (✗) the code.</li>
 			</ul>
-			
-			<h3><u>Step 1: Select the website</u></h3>
-			Find the correct website that this code was quoted from. Use the <b>Selector</b> part of the code (the part before <code>{</code> ) to narrow it down to one site then noted down the <b>Threshold</b> value of it.
-			<table>
+
+			<h3>Step 1: Select the website</h3>
+			<p>Find the website this code was quoted from. Use the <strong>Selector</strong> part of the code (the part before <code>{</code>) to narrow it down to one site, then note down its <strong>Threshold</strong> value.
+			<table class='webdesign webdesign-websites'>
 			  <tr>
-				<td><b><u>Edison Daily (news site)</u></b><br><br>Elements: body, a, h3, blockquote<br>IDs: #header, #comments<br>Classes: .post, .title, .author<br><br><b>Threshold: #00FF00</b></td>
-				<td><b><u>Buddymaker (social media)</u></b><br><br>Elements: div, span, img, a<br>IDs: #msg, #cover, #content, #sidebar<br>Classes: .post, .title, .share<br><br><b>Threshold: #8040C0</b></td>
+				<td><h4>Edison Daily (news site)</h4><p>Elements: body, a, h3, blockquote<p>IDs: #header, #comments<p>Classes: .post, .title, .author<p><p class='threshold'>Threshold: #00FF00</p></td>
+				<td><h4>Buddymaker (social media)</h4><p>Elements: div, span, img, a<p>IDs: #msg, #cover, #content, #sidebar<p>Classes: .post, .title, .share<p><p class='threshold'>Threshold: #8040C0</p></td>
 			  </tr>
 			  <tr>
-				<td><b><u>PNGdrop (image hosting)</u></b><br><br>Elements: div, img<br>IDs: #main, #comments, #fullview<br>Classes: .username, .share, .large<br><br><b>Threshold: #BADA55</b></td>
-				<td><b><u>BobIRS (chatroom)</u></b><br><br>Elements: ul, ol, img, b, i<br>IDs: #sidebar<br>Classes: .avatar, .username<br><br><b>Threshold: #03E61E</b></td>
+				<td><h4>PNGdrop (image hosting)</h4><p>Elements: div, img<p>IDs: #main, #comments, #fullview<p>Classes: .username, .share, .large<p><p class='threshold'>Threshold: #BADA55</p></td>
+				<td><h4>BobIRS (chatroom)</h4><p>Elements: ul, ol, img, b, i<p>IDs: #sidebar<p>Classes: .avatar, .username<p><p class='threshold'>Threshold: #03E61E</p></td>
 			  </tr>
 			  <tr>
-				<td><b><u>Vidhost (video hosting)</u></b><br><br>Elements: div, iframe, b, i<br>IDs: #main, #rating, #comments<br>Classes: .username, .share, .channel<br><br><b>Threshold: #60061E</b></td>
-				<td><b><u>Go Team Falcon online (online game)</u></b><br><br>Elements: body, iframe<br>IDs: #rating, #comments<br>Classes: .rating, .fullscreen<br><br><b>Threshold: #501337</b></td>
+				<td><h4>Vidhost (video hosting)</h4><p>Elements: div, iframe, b, i<p>IDs: #main, #rating, #comments<p>Classes: .username, .share, .channel<p><p class='threshold'>Threshold: #60061E</p></td>
+				<td><h4>Go Team Falcon online (online game)</h4><p>Elements: body, iframe<p>IDs: #rating, #comments<p>Classes: .rating, .fullscreen<p><p class='threshold'>Threshold: #501337</p></td>
 			  </tr>
 			  <tr>
-				<td><b><u>Stufflocker (cloud storage)</u></b><br><br>Elements: div, h3, img, iframe<br>IDs: #sidebar, #download<br>Classes: .menu, .author<br><br><b>Threshold: B020E5</b></td>
-				<td><b><u>Steel Nexus (forum)</u></b><br><br>Elements: body, div, img, blockquote<br>IDs: #header, #content, #sidebar<br>Classes: .avatar, .reply<br><br><b>Threshold: #BEA61E</b></td>
+				<td><h4>Stufflocker (cloud storage)</h4><p>Elements: div, h3, img, iframe<p>IDs: #sidebar, #download<p>Classes: .menu, .author<p><p class='threshold'>Threshold: B020E5</p></td>
+				<td><h4>Steel Nexus (forum)</h4><p>Elements: body, div, img, blockquote<p>IDs: #header, #content, #sidebar<p>Classes: .avatar, .reply<p><p class='threshold'>Threshold: #BEA61E</p></td>
 			  </tr>
 			</table>
         </div>
@@ -63,63 +76,63 @@
 		</div>
 		<div class="page-content">
 			<h3>Step 2: Find the color target</h3>
-			Find the first color name in the CSS file, then use the following table to determine a hexadecimal value of that color.
-			This value is the <b>Color Target</b> that you will need later.
-			<table>
+			<p>Find the first color name in the CSS file, then use the following table to determine a hexadecimal value of that color.
+			This value is the <strong>Color Target</strong> that you will need later.
+			<table class='webdesign webdesign-target'>
 			  <tr>
-				<th>Color</th>
-				<th>Hex value</th>
-				<th>Color</th>
-				<th>hex value</th>
-				<th>Color</th>
-				<th>Hex value</th>
+				<th>Color
+				<th>Hex value
+				<th>Color
+				<th>Hex value
+				<th>Color
+				<th>Hex value
 			  </tr>
 			  <tr>
-				<td>Blue</td>
-				<td>#0000FF</td>
-				<td>Yellow</td>
-				<td>#FFFF00</td>
-				<td>Red</td>
-				<td>#FF0000</td>
+				<th>Blue
+				<td>#0000FF
+				<th>Yellow
+				<td>#FFFF00
+				<th>Red
+				<td>#FF0000
 			  </tr>
 			  <tr>
-				<td>Green</td>
-				<td>#00FF00</td>
-				<td>White</td>
-				<td>#FFFFFF</td>
-				<td>Orange</td>
-				<td>#FFA500</td>
+				<th>Green
+				<td>#00FF00
+				<th>White
+				<td>#FFFFFF
+				<th>Orange
+				<td>#FFA500
 			  </tr>
 			  <tr>
-				<td>Purple</td>
-				<td>#800080</td>
-				<td>Magenta</td>
-				<td>#FF00FF</td>
-				<td>Gray</td>
-				<td>#808080</td>
+				<th>Purple
+				<td>#800080
+				<th>Magenta
+				<td>#FF00FF
+				<th>Gray
+				<td>#808080
 			  </tr>
 			</table>
-			<h4>Note:</h4> The Hexadecimal value of color is denoted in #RRGGBB manner.
+			<p><strong>Note:</strong> The hexadecimal value of a color is denoted in #RRGGBB format.
 			<h3>Step 3: Calculate site score</h3>
-			Please do the following:
+			<p>Calculate the site score as follows:
 			<ul>
-				<li>Starts with the amount of line in the code inside the <code>{curly braces}</code>. Counting semi-colon is a good idea because it is a line terminator.</li>
+				<li>Start with the number of lines of code inside the <code>{curly braces}</code>. Counting semi-colons is a good idea because it is a line terminator.</li>
 				<li>+3 score each for:
 					<ul>
 						<li>R value of the Color Target is less than R value of the threshold.</li>
 						<li>G value of the Color Target is greater than or equal to G value of the threshold.</li>
 						<li>B value of the Color Target is greater than B value of the threshold.</li>
 					</ul></li>
-				<li>+2 score for any <code>margin/padding</code>.</li>
-				<li>+1 score for a <code>border/border-radius</code> unless it's <code>0px</code> or <code>50%</code>.</li>
-				<li>-1 score for a <code>z-index</code> without a <code>position</code>.</li>
-				<li>+1 score for a <code>font-family</code> unless it's <code>"Comic Sans MS"</code>, which gives a -5 score.</li>
-				<li>+2 score for a <code>box-shadow/text-shadow</code> unless it's <code>none</code>.</li>
-				<li>x2 score if the buttons on the module are colored, or -3 score if they are gray.</li>
-				<li>If you score is now negative or 0, keep adding 16 until it's positive.</li>
-				<li>Add each digit together until it's a single digit, then use the following table to determine which button to push.</li>
+				<li>+2 score for each <code>margin</code>/<code>padding</code>.</li>
+				<li>+1 score for each <code>border</code>/<code>border-radius</code> unless it's <code>0px</code> or <code>50%</code>.</li>
+				<li>-1 score for each <code>z-index</code> without a <code>position</code>.</li>
+				<li>+1 score for each <code>font-family</code> unless it's <code>"Comic Sans MS"</code>, which gives a -5 score.</li>
+				<li>+2 score for each <code>box-shadow</code>/<code>text-shadow</code> unless it's <code>none</code>.</li>
+				<li>×2 score if the buttons on the module are colored, or -3 score if they are gray.</li>
+				<li>If your score is now negative or 0, keep adding 16 until it's positive.</li>
+				<li>Keep adding up the digits of the number until you are left with a single digit. Then use the following table to determine which button to push.</li>
 			</ul>
-			<table align ="center">
+			<table class='webdesign webdesign-final'>
 			  <tr>
 				<th>Accept (✓)</th>
 				<th>Consider (Δ)</th>
