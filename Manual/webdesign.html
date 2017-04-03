@@ -2,100 +2,138 @@
 <html class="no-js"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Keep Talking and Nobody Explodes Example Manual Page</title>
+    <title>Web Design - Keep Talking and Nobody Explodes Module</title>
     <meta name="viewport" content="initial-scale=1"> 
 	<link href='https://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+	<style>
+		code {
+			background-color: #D8DADA;
+		}
+	</style>
 </head>
 <body>
 <div class="section">
     <div class="page page-bg-01">
-        		<div class="page-header">
+        <div class="page-header">
 			<span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
-			<span class="page-header-section-title">YOUR MODULE TITLE HERE</span>
+			<span class="page-header-section-title">Web Design</span>
 		</div>
         <div class="page-content">
-    	    <img src="img/Component.svg" class="diagram">
-            <h2>On the Subject of YOUR MODULE</h2>
+    	    <img src="img/webdesign.svg" class="diagram">
+            <h2>On the Subject of Web Design</h2>
             <p class="flavour-text">
-					Text here should only set a mood and not contain anything necessary to defuse the bomb. For official modules we don't refer to the bomber as we don't really want to imply anything about them.
+				Welcome to web design class. The first rule of web design is: You do not talk about Comic Sans MS.
+				The second rule is: You DO NOT talk about Comic Sans MS. The third rule is: The word "color" is NEVER spelled with a U.
 			</p>
-
-			<p> The rest of this section is freeform and contains the rules for your module. Here are a few sample tables from our manual you can optionally use as a template if you wish.</p>
-			<!-- Here are some examples of tables that we use in the manual that you can use if it makes sense -->
-			<!-- Wires table -->
+			
+			<ul>
+				<li> A snippet of a CSS file will be displayed on the screen. </li>
+				<li> Based on the information given, you have to Accept(✓), Consider(Δ), or Reject(✗) the code. </li>
+			</ul>
+			
+			<h3><u>Step 1: Select the website</u></h3>
+			Find the correct website that this code was quoted from. Use the <b>Selector</b> part of the code (the part before <code>{</code> ) to narrow it down to one site then noted down the <b>Threshold</b> value of it.
 			<table>
-				<tbody>
-					<tr>
-						<td><strong><em>3 wires:</em></strong><br>
-						If there are no red wires, cut the second wire.<br>
-						Otherwise, if the last wire is white, cut the last wire.<br>
-						Otherwise, if there is more than one blue wire, cut the last
-						blue wire.<br>
-						Otherwise, cut the last wire.</td>
-					</tr>
-					<tr>
-						<td><strong><em>4 wires:</em></strong><br>
-						If there is more than one red wire and the last digit of the
-						serial number is odd, cut the last red wire.<br>
-						Otherwise, if the last wire is yellow and there are no red
-						wires, cut the first wire.<br>
-						Otherwise, if there is exactly one blue wire, cut the first
-						wire.<br>
-						Otherwise, if there is more than one yellow wire, cut the last
-						wire.<br>
-						Otherwise, cut the second wire.</td>
-					</tr>
-					<tr>
-						<td><strong><em>5 wires:</em></strong><br>
-						If the last wire is black and the last digit of the serial
-						number is odd, cut the fourth wire.<br>
-						Otherwise, if there is exactly one red wire and there is more
-						than one yellow wire, cut the first wire.<br>
-						Otherwise, if there are no black wires, cut the second
-						wire.<br>
-						Otherwise, cut the first wire.</td>
-					</tr>
-				</tbody>
-			</table>
-			<br>
-			<br>
-			<!-- Simon table -->
-			<table class="repeaters-table">
-				<tbody>
-					<tr>
-						<th class="repeaters-spacer" colspan="2"></th>
-						<th>Red Flash</th>
-						<th>Blue Flash</th>
-						<th>Green Flash</th>
-						<th>Yellow Flash</th>
-					</tr>
-					<tr>
-						<th rowspan="3">Button&nbsp;to&nbsp;press:</th>
-						<th>No&nbsp;Strikes</th>
-						<td>Blue</td>
-						<td>Yellow</td>
-						<td>Green</td>
-						<td>Red</td>
-					</tr>
-					<tr>
-						<th>1&nbsp;Strike</th>
-						<td>Red</td>
-						<td>Blue</td>
-						<td>Yellow</td>
-						<td>Green</td>
-					</tr>
-					<tr>
-						<th>2&nbsp;Strikes</th>
-						<td>Yellow</td>
-						<td>Green</td>
-						<td>Blue</td>
-						<td>Red</td>
-					</tr>
-				</tbody>
+			  <tr>
+				<td><b><u>Edison Daily (news site)</u></b><br><br>Elements: body, a, h3, blockquote<br>IDs: #header, #comments<br>Classes: .post, .title, .author<br><br><b>Threshold: #00FF00</b></td>
+				<td><b><u>Buddymaker (social media)</u></b><br><br>Elements: div, span, img, a<br>IDs: #msg, #cover, #content, #sidebar<br>Classes: .post, .title, .share<br><br><b>Threshold: #8040C0</b></td>
+			  </tr>
+			  <tr>
+				<td><b><u>PNGdrop (image hosting)</u></b><br><br>Elements: div, img<br>IDs: #main, #comments, #fullview<br>Classes: .username, .share, .large<br><br><b>Threshold: #BADA55</b></td>
+				<td><b><u>BobIRS (chatroom)</u></b><br><br>Elements: ul, ol, img, b ,i<br>IDs: #sidebar<br>Classes: .avatar, .username<br><br><b>Threshold: #03E61E</b></td>
+			  </tr>
+			  <tr>
+				<td><b><u>Cinemax (video hosting)</u></b><br><br>Elements: div, iframe, b ,i<br>IDs: #main, #rating, #comments<br>Classes: .username, .share, .channel<br><br><b>Threshold: #60061E</b></td>
+				<td><b><u>Go Team Falcon online (online game)</u></b><br><br>Elements: body, iframe<br>IDs: #rating, #comments<br>Classes: .rating, .fullscreen<br><br><b>Threshold: #501337</b></td>
+			  </tr>
+			  <tr>
+				<td><b><u>Stufflocker (cloud storage)</u></b><br><br>Elements: div, h3, img, iframe<br>IDs: #sidebar, #download<br>Classes: .menu, .author<br><br><b>Threshold: B020E5</b></td>
+				<td><b><u>Steel Nexus (forum)</u></b><br><br>Elements: body, div, img, blockquote<br>IDs: #header, #content, #sidebar<br>Classes: .avatar, .reply<br><br><b>Threshold: #BEA61E</b></td>
+			  </tr>
 			</table>
         </div>
+		<div class="page-footer relative-footer">Page 1 of 2</div>
+	</div>
+	<div class="page page-bg-05">
+        <div class="page-header">
+			<span class="page-header-doc-title">Keep Talking and Nobody Explodes Mod</span>
+			<span class="page-header-section-title">Web Design</span>
+		</div>
+		<br />
+		<div class="page-content">
+			<h3>Step 2: Find the color target</h3>
+			Find the first color name in the CSS file, then use the following table to determine a hexadecimal value of that color.
+			This value is the <b>Color Target</b> that you will need later.
+			<table>
+			  <tr>
+				<th>Color</th>
+				<th>Hex value</th>
+				<th>Color</th>
+				<th>hex value</th>
+				<th>Color</th>
+				<th>Hex value</th>
+			  </tr>
+			  <tr>
+				<td>Blue</td>
+				<td>#0000FF</td>
+				<td>Yellow</td>
+				<td>#FFFF00</td>
+				<td>Red</td>
+				<td>#FF0000</td>
+			  </tr>
+			  <tr>
+				<td>Green</td>
+				<td>#00FF00</td>
+				<td>White</td>
+				<td>#FFFFFF</td>
+				<td>Orange</td>
+				<td>#FFA500</td>
+			  </tr>
+			  <tr>
+				<td>Purple</td>
+				<td>#800080</td>
+				<td>Magenta</td>
+				<td>#FF00FF</td>
+				<td>Gray</td>
+				<td>#808080</td>
+			  </tr>
+			</table>
+			<h4>Note:</h4> The Hexadecimal value of color is denoted in #RRGGBB manner.
+			<h3>Step 3: Calculate site score</h3>
+			Please do the following:
+			<ul>
+				<li>Starts with the amount of line in the code inside the <code>{curly braces}</code>. Counting semi-colon is a good idea because it is a line terminator.</li>
+				<li>+3 score each for:
+					<ul>
+						<li>R value of the Color Target is less than R value of the threshold.</li>
+						<li>G value of the Color Target is greater than or equal to G value of the threshold.</li>
+						<li>B value of the Color Target is greater than B value of the threshold.</li>
+					</ul></li>
+				<li>+2 score for any <code>margin/padding</code>.</li>
+				<li>+1 score for a <code>border/border-radius</code> unless it's <code>0px</code> or <code>50%</code>.</li>
+				<li>-1 score for a <code>z-index</code> without a <code>position</code>.</li>
+				<li>+1 score for a <code>font-family</code> unless it's <code>"Comic Sans MS"</code>, which gives a -5 score.</li>
+				<li>+2 score for a <code>box-shadow/text-shadow</code> unless it's <code>none</code>.</li>
+				<li>x2 score if the buttons on the module are colored, or -3 score if they are gray.</li>
+				<li>If you score is now negative or 0, keep adding 16 until it's positive.</li>
+				<li>Add each digit together until it's a single digit, then use the following table to determine which button to push.</li>
+			</ul>
+			<table align ="center">
+			  <tr>
+				<th>Accept(✓)</th>
+				<th>Consider(Δ)</th>
+				<th>Reject(✗)</th>
+			  </tr>
+			  <tr>
+				<td>2, 3, 5, 7</td>
+				<td>6, 8</td>
+				<td>1, 4, 9</td>
+			  </tr>
+			</table>
+		</div>
+		<div class="page-footer relative-footer">Page 2 of 2</div>
     </div>
 </div>
 </body></html>

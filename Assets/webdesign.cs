@@ -14,12 +14,12 @@ public class webdesign : MonoBehaviour {
     private string[,] selectors = new string[8, 8] {
         {"body.post","a#header","a.author","h3.post","h3#header",".post blockquote",".post #comments","#header h3"},
         {"div#msg","#msg","img#cover","#sidebar a","div#content .post","div.title","div.post","#content span.share"},
-        {"div#fullview","#comments","img#main","img.large","#comments div.username","div#main img","img#fullview","div#comments.large"},
-        {"ol","img.avatar","#sidebar b.username",".avatar","ul b","#sidebar ul","#sidebar img","ol i"},
+        {"div#fullview","#comments.large","img#main","img.large","#fullview div.username","div#main img","img#fullview","div#comments.large"},
+        {"ol","i.avatar","#sidebar b.username","ul.avatar","ul b","#sidebar ul","#sidebar img.username","ol i"},
         {"div#main iframe","iframe#main","#comments.channel .share","#comments b.username","div b","div#comments b.channel","#comments i","#rating iframe.share"},
         {"body iframe","body.fullscreen","iframe.fullscreen","body #rating","#rating .rating",".fullscreen #comments","iframe#rating.rating","iframe#comments.rating"},
         {"#sidebar h3","div#download","#download","iframe#download","div .menu","#sidebar h3.author","img.author","img.menu"},
-        {"body #content","body #sidebar","#content img.avatar","blockquote","blockquote.reply","div.reply","div.avatar","img.reply"}
+        {"body #content","body #sidebar","#content img.avatar","blockquote#sidebar","blockquote.reply","div.reply","div.avatar","img.reply"}
     };
 
     private string[] sitename = { "Edison Daily", "Buddymaker", "PNGdrop", "BobIRS", "Cinemax", "Go Team Falcon online", "Stufflocker", "Steel Nexus" };
@@ -34,27 +34,12 @@ public class webdesign : MonoBehaviour {
     private string[] shadow = { "box-shadow: none;", "text-shadow: none;", "text-shadow: *;", "box-shadow: 0px 2px 4px\n  *;", "box-shadow: 2px 3px 8px\n  *;", "box-shadow: 2px 2px 0px\n  * inset;", "text-shadow: 1px 2px 6px\n  *;", "text-shadow: -1px -4px 0px\n  *;", "text-shadow: 12px 14px 1px\n  *;" };
 
     private int[] thresR = { 0, 128, 186, 3, 96, 80, 176, 190 }, thresG = { 255, 64, 218, 230, 6, 19, 32, 166 }, thresB = { 0, 192, 85, 30, 30, 55, 229, 30 };
-    private int[] colorR = { 0, 0, 128, 255, 255, 255, 255, 255, 128 }, colorG = { 0, 255, 0, 255, 255, 255, 0, 165, 128 }, colorB = { 255, 0, 128, 0, 255, 255, 0, 0, 128 };
-
-    /*
-     * CHECKLISTS
-     * OK-> colors need to be randomized (probably through string search for *)
-     * OK-> start with amount of lines (randomize)
-     * OK-> +3 for each RGB conditions met (R=lower/G=equal/B=higher)
-     * OK-> +2 for all margin/padding
-     * OK-> +1 for border/radius (unless 0px/50%)
-     * OK-> -1 z-index w/o position
-     * OK-> +1 for font-family (-5 for Comic Sans MS)
-     * OK-> +2 for shadow (unless none)
-     * -> x2 for colored buttons (-3 for gray)
-     * -> adding 16 until positive
-     * -> sum each digits until it is a single digit
-    */
+    private int[] colorR = { 0, 0, 128, 255, 255, 255, 255, 255, 128 }, colorG = { 0, 255, 0, 255, 255, 0, 0, 165, 128 }, colorB = { 255, 0, 128, 0, 255, 255, 0, 0, 128 };
 
     private string screen = "";
     private string[] tempscreen;
-    private int lineCnt, selectA, selectB, ans = 0, finalans, chk, tarR = 127, tarG = 127, tarB = 127;
-    private bool useColor = false, zidx = false, pos = false;
+    private int lineCnt, selectA, selectB, ans = 0, finalans, chk, tarR = 127, tarG = 127, tarB = 127, zidx = 0;
+    private bool useColor = false, pos = false, _isSolved = false;
 
     void Start ()
     {
@@ -64,21 +49,24 @@ public class webdesign : MonoBehaviour {
 
     void Awake()
     {
-        btn[0].OnInteract += delegate ()
-        {
-            ansChk(0);
-            return false;
-        };
-        btn[1].OnInteract += delegate ()
-        {
-            ansChk(1);
-            return false;
-        };
-        btn[2].OnInteract += delegate ()
-        {
-            ansChk(2);
-            return false;
-        };
+        if(!_isSolved)
+		{
+			btn[0].OnInteract += delegate ()
+			{
+				ansChk(0);
+				return false;
+			};
+			btn[1].OnInteract += delegate ()
+			{
+				ansChk(1);
+				return false;
+			};
+			btn[2].OnInteract += delegate ()
+			{
+				ansChk(2);
+				return false;
+			};
+		}
     }
 
     void Init()
@@ -129,7 +117,7 @@ public class webdesign : MonoBehaviour {
             {
                 subfeature = Random.Range(0, position.Length);
                 tempscreen[i] = position[subfeature];
-                if (subfeature > 2) pos = true; else zidx = true;
+                if (subfeature < 3) pos = true; else zidx++;
             }
             else if (feature == 5)
             {
@@ -161,10 +149,10 @@ public class webdesign : MonoBehaviour {
         }
 
         //other misc adjustments
-        if (zidx && !pos)
+        if (zidx > 0 && !pos)
         {
-            ans--;
-            Debug.LogFormat("[Web design #{0}] z-index without position found: score -1", _moduleId);
+            ans-=zidx;
+            Debug.LogFormat("[Web design #{0}] z-index without position found: score -{1}", _moduleId, zidx);
         }
 
         if (!useColor) Debug.LogFormat("[Web design #{0}] No color found, now using default target of 127 127 127", _moduleId);
@@ -173,10 +161,10 @@ public class webdesign : MonoBehaviour {
             ans += 3;
             Debug.LogFormat("[Web design #{0}] R target < threshold: score +3", _moduleId);
         }
-        if (tarG == thresG[selectA])
+        if (tarG >= thresG[selectA])
         {
             ans += 3;
-            Debug.LogFormat("[Web design #{0}] G target = threshold: score +3", _moduleId);
+            Debug.LogFormat("[Web design #{0}] G target >= threshold: score +3", _moduleId);
         }
         if (tarB > thresB[selectA])
         {
@@ -248,6 +236,7 @@ public class webdesign : MonoBehaviour {
 
         if (m == chk)
         {
+			_isSolved = true;
             Module.HandlePass();
             Debug.LogFormat("[Web Design #{0}] Answer correct! Module passed!", _moduleId);
         }
