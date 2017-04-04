@@ -24,6 +24,8 @@ public class webdesign : MonoBehaviour {
 
     private string[] sitename = { "Edison Daily", "Buddymaker", "PNGdrop", "BobIRS", "Vidhost", "Go Team Falcon online", "Stufflocker", "Steel Nexus" };
     private string[] randomcolor = { "blue", "green", "purple", "yellow", "white", "magenta", "red", "orange", "gray" };
+    private string[] btnText = { "Accept", "Consider", "Reject" };
+
     private string[] colors = { "color: *;", "background: *;", "background-color: *;" };
     private string[] margin = { "margin: 0 auto;", "margin: 2px 4px;", "margin: 1em;", "margin: calc(100vw-640px);", "margin: 25%;", "margin: 80px 40px;", "margin: 4.2em 1.0em;", "margin: auto;", "padding: 4px;",
         "padding: 2px 8px;", "padding: 0;", "padding: calc(100%-64px);", "padding: 32px;" };
@@ -76,7 +78,7 @@ public class webdesign : MonoBehaviour {
         selectA = Random.Range(0, 8);
         selectB = Random.Range(0, 8);
         Debug.LogFormat("[Web Design #{0}] Site {1} was selected", _moduleId, sitename[selectA]);
-        Debug.LogFormat("[Web design #{0}] Threshold RGB value is {1} {2} {3}", _moduleId, thresR[selectA], thresG[selectA], thresB[selectA]);
+        Debug.LogFormat("[Web design #{0}] Threshold RGB value is #{1}{2}{3} (Or in Dec: {4} {5} {6})", _moduleId, thresR[selectA].ToString("X"), thresG[selectA].ToString("X"), thresB[selectA].ToString("X"), thresR[selectA], thresG[selectA], thresB[selectA]);
 
         lineCnt = Random.Range(3, 7);
         tempscreen = new string[lineCnt + 2];
@@ -155,7 +157,7 @@ public class webdesign : MonoBehaviour {
             Debug.LogFormat("[Web design #{0}] z-index without position found: score -{1}", _moduleId, zidx);
         }
 
-        if (!useColor) Debug.LogFormat("[Web design #{0}] No color found, now using default target of 127 127 127", _moduleId);
+        if (!useColor) Debug.LogFormat("[Web design #{0}] No color found, now using default target of #7F7F7F (Or in Dec: 127 127 127)", _moduleId);
         if (tarR < thresR[selectA])
         {
             ans += 3;
@@ -201,11 +203,12 @@ public class webdesign : MonoBehaviour {
             finalans = temp;
         }
         while (finalans > 9);
-        Debug.LogFormat("[Web design #{0}] Score is {1}, Sum is {2}", _moduleId, ans, finalans);
 
         if (new[] { 2, 3, 5, 7 }.Contains(finalans)) chk = 0;
         else if (new[] { 6, 8 }.Contains(finalans)) chk = 1;
         else chk = 2;
+
+        Debug.LogFormat("[Web design #{0}] Score is {1}, Sum is {2}, Expected answer is {3}", _moduleId, ans, finalans, btnText[chk]);
 
         screen = string.Join("\n ", tempscreen);
         text.text = screen;
@@ -222,14 +225,12 @@ public class webdesign : MonoBehaviour {
             tarR = colorR[sel];
             tarG = colorG[sel];
             tarB = colorB[sel];
-            Debug.LogFormat("[Web design #{0}] First color found (target) is {1}, with RGB value of {2} {3} {4}", _moduleId, randomcolor[sel], tarR, tarG, tarB);
+            Debug.LogFormat("[Web design #{0}] First color found (target) is {1}, with RGB value of #{2}{3}{4} (Or in Dec: {5} {6} {7})", _moduleId, randomcolor[sel], tarR.ToString("X"), tarG.ToString("X"), tarB.ToString("X"), tarR, tarG, tarB);
         }
     }
 
     void ansChk(int m)
     {
-        string[] btnText = { "Accept", "Consider", "Reject" };
-
         Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, btn[m].transform);
         btn[m].AddInteractionPunch();
         Debug.LogFormat("[Web design #{0}] button {1} was pressed. (Expected {2})", _moduleId, btnText[m], btnText[chk]);
