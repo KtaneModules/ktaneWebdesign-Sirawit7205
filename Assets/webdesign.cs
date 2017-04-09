@@ -248,4 +248,16 @@ public class webdesign : MonoBehaviour {
         }
     }
 
+    KMSelectable[] ProcessTwitchCommand(string command)
+    {
+        switch(command.ToLowerInvariant().Trim())
+        {
+            case "accept": case "acc": return new[] { btn[0] };
+            case "consider": case "con": return new[] { btn[1] };
+            case "reject": case "rej": return new[] { btn[2] };
+        }
+
+        return null;
+    }
+
 }
