@@ -40,6 +40,7 @@ public class webdesign : MonoBehaviour {
 
     private string screen = "";
     private string[] tempscreen;
+    private int[] dbg = new int[5];
     private int lineCnt, selectA, selectB, ans = 0, finalans, chk, tarR = 127, tarG = 127, tarB = 127, zidx = 0;
     private bool useColor = false, pos = false, _isSolved = false;
 
@@ -102,7 +103,7 @@ public class webdesign : MonoBehaviour {
                 subfeature = Random.Range(0, margin.Length);
                 tempscreen[i] = margin[subfeature];
                 ans += 2;
-                Debug.LogFormat("[Web design #{0}] Margin/Padding found: score +2",_moduleId);
+                dbg[0]++;
             }
             else if (feature == 3)
             {
@@ -112,7 +113,7 @@ public class webdesign : MonoBehaviour {
                 if (subfeature > 2)
                 {
                     ans++;
-                    Debug.LogFormat("[Web design #{0}] Acceptable Border/Border-radius found: score +1", _moduleId);
+                    dbg[1]++;
                 }
             }
             else if (feature == 4)
@@ -128,12 +129,12 @@ public class webdesign : MonoBehaviour {
                 if (subfeature == 0)
                 {
                     ans -= 5;
-                    Debug.LogFormat("[Web design #{0}] Unacceptable font found: score -5", _moduleId);
+                    dbg[2]++;
                 }
                 else
                 {
                     ans++;
-                    Debug.LogFormat("[Web design #{0}] Acceptable font found: score +1",_moduleId);
+                    dbg[3]++;
                 }
             }
             else
@@ -144,34 +145,46 @@ public class webdesign : MonoBehaviour {
                 if (subfeature > 1)
                 {
                     ans += 2;
-                    Debug.LogFormat("[Web design #{0}] Acceptable drop shadow found: score +2", _moduleId);
-
+                    dbg[4]++;
                 }
             }
         }
+
+        screen = string.Join("\n ", tempscreen);
+        text.text = screen;
+        Debug.LogFormat("[Web design #{0}] For reference purpose, complete code is:\n{1}", _moduleId, screen);
+
+        //Logging features
+        Debug.LogFormat("[Web design #{0}] Detailed score calculation:",_moduleId);
+        Debug.LogFormat("[Web design #{0}] -> Base score = {1}", _moduleId, lineCnt);
+        if (dbg[0] > 0) Debug.LogFormat("[Web design #{0}] ->  {1} Margin/Padding found: score +{2}", _moduleId, dbg[0], dbg[0] * 2);
+        if (dbg[1] > 0) Debug.LogFormat("[Web design #{0}] ->  {1} Acceptable Border/Border-radius found: score +{2}", _moduleId, dbg[1], dbg[1]);
+        if (dbg[2] > 0) Debug.LogFormat("[Web design #{0}] ->  {1} Unacceptable font found: score -{2}", _moduleId, dbg[2], dbg[2] * 5);
+        if (dbg[3] > 0) Debug.LogFormat("[Web design #{0}] ->  {1} Acceptable font found: score +{2}", _moduleId, dbg[3], dbg[3]);
+        if (dbg[4] > 0) Debug.LogFormat("[Web design #{0}] ->  {1} Acceptable drop shadow found: score +{2}", _moduleId, dbg[4], dbg[4] * 2);
 
         //other misc adjustments
         if (zidx > 0 && !pos)
         {
             ans-=zidx;
-            Debug.LogFormat("[Web design #{0}] z-index without position found: score -{1}", _moduleId, zidx);
+            Debug.LogFormat("[Web design #{0}] ->  z-index without position found: score -{1}", _moduleId, zidx);
         }
 
-        if (!useColor) Debug.LogFormat("[Web design #{0}] No color found, now using default target of #7F7F7F (Or in Dec: 127 127 127)", _moduleId);
+        if (!useColor) Debug.LogFormat("[Web design #{0}] ->  No color found, now using default target of #7F7F7F (Or in Dec: 127 127 127)", _moduleId);
         if (tarR < thresR[selectA])
         {
             ans += 3;
-            Debug.LogFormat("[Web design #{0}] R target < threshold: score +3", _moduleId);
+            Debug.LogFormat("[Web design #{0}] ->  R target < threshold: score +3", _moduleId);
         }
         if (tarG >= thresG[selectA])
         {
             ans += 3;
-            Debug.LogFormat("[Web design #{0}] G target >= threshold: score +3", _moduleId);
+            Debug.LogFormat("[Web design #{0}] ->  G target >= threshold: score +3", _moduleId);
         }
         if (tarB > thresB[selectA])
         {
             ans += 3;
-            Debug.LogFormat("[Web design #{0}] B target > threshold: score +3", _moduleId);
+            Debug.LogFormat("[Web design #{0}] ->  B target > threshold: score +3", _moduleId);
         }
 
         if (Random.Range(0, 2) == 1)
@@ -180,17 +193,17 @@ public class webdesign : MonoBehaviour {
             btn[0].GetComponent<MeshRenderer>().material.color = new Color32(0x50, 0xF7, 0x36, 0xFF);
             btn[1].GetComponent<MeshRenderer>().material.color = new Color32(0xF7, 0xA4, 0x20, 0xFF);
             btn[2].GetComponent<MeshRenderer>().material.color = new Color32(0xEF, 0x2D, 0x2D, 0xFF);
-            Debug.LogFormat("[Web design #{0}] Colored buttons: score x2", _moduleId);
+            Debug.LogFormat("[Web design #{0}] ->  Colored buttons: score x2", _moduleId);
         }
         else
         {
             ans -= 3;
-            Debug.LogFormat("[Web design #{0}] Gray buttons: score -3", _moduleId);
+            Debug.LogFormat("[Web design #{0}] ->  Gray buttons: score -3", _moduleId);
         }
 
-        Debug.LogFormat("[Web design #{0}] Score is now {1}", _moduleId, ans);
+        Debug.LogFormat("[Web design #{0}] ->  Score is now {1}", _moduleId, ans);
         while (ans < 1) ans += 16;
-        Debug.LogFormat("[Web design #{0}] After positive adjustment: {1}", _moduleId, ans);
+        Debug.LogFormat("[Web design #{0}] ->  After positive adjustment: {1}", _moduleId, ans);
         finalans = ans;
         do
         {
@@ -203,16 +216,14 @@ public class webdesign : MonoBehaviour {
             finalans = temp;
         }
         while (finalans > 9);
+        Debug.LogFormat("[Web design #{0}] ->  After digital root: {1}", _moduleId, finalans);
 
         if (new[] { 2, 3, 5, 7 }.Contains(finalans)) chk = 0;
         else if (new[] { 6, 8 }.Contains(finalans)) chk = 1;
         else chk = 2;
 
-        Debug.LogFormat("[Web design #{0}] Score is {1}, Sum is {2}, Expected answer is {3}", _moduleId, ans, finalans, btnText[chk]);
+        Debug.LogFormat("[Web design #{0}] Summary: Score is {1}, Sum is {2}, Expected answer is {3}", _moduleId, ans, finalans, btnText[chk]);
 
-        screen = string.Join("\n ", tempscreen);
-        text.text = screen;
-        Debug.LogFormat("[Web design #{0}] For reference purpose, complete code is:\n{1}", _moduleId, screen);
     }
 
     void colorSelector(int idx)
