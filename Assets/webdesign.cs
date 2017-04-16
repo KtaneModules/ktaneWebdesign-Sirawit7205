@@ -42,7 +42,7 @@ public class webdesign : MonoBehaviour {
     private string[] tempscreen;
     private int[] dbg = new int[5];
     private int lineCnt, selectA, selectB, ans = 0, finalans, chk, tarR = 127, tarG = 127, tarB = 127, zidx = 0;
-    private bool useColor = false, pos = false, _isSolved = false;
+    private bool useColor = false, pos = false, _isSolved = false, _lightsOn = false;
 
     void Start ()
     {
@@ -52,24 +52,21 @@ public class webdesign : MonoBehaviour {
 
     void Awake()
     {
-        if(!_isSolved)
+		btn[0].OnInteract += delegate ()
 		{
-			btn[0].OnInteract += delegate ()
-			{
-				ansChk(0);
-				return false;
-			};
-			btn[1].OnInteract += delegate ()
-			{
-				ansChk(1);
-				return false;
-			};
-			btn[2].OnInteract += delegate ()
-			{
-				ansChk(2);
-				return false;
-			};
-		}
+			ansChk(0);
+			return false;
+		};
+		btn[1].OnInteract += delegate ()
+		{
+			ansChk(1);
+			return false;
+		};
+		btn[2].OnInteract += delegate ()
+		{
+			ansChk(2);
+			return false;
+		};
     }
 
     void Init()
@@ -224,6 +221,7 @@ public class webdesign : MonoBehaviour {
 
         Debug.LogFormat("[Web design #{0}] Summary: Score is {1}, Sum is {2}, Expected answer is {3}", _moduleId, ans, finalans, btnText[chk]);
 
+        _lightsOn = true;
     }
 
     void colorSelector(int idx)
@@ -244,18 +242,21 @@ public class webdesign : MonoBehaviour {
     {
         Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, btn[m].transform);
         btn[m].AddInteractionPunch();
-        Debug.LogFormat("[Web design #{0}] button {1} was pressed. (Expected {2})", _moduleId, btnText[m], btnText[chk]);
+        if(!_isSolved && _lightsOn)
+        {
+            Debug.LogFormat("[Web design #{0}] button {1} was pressed. (Expected {2})", _moduleId, btnText[m], btnText[chk]);
 
-        if (m == chk)
-        {
-			_isSolved = true;
-            Module.HandlePass();
-            Debug.LogFormat("[Web Design #{0}] Answer correct! Module passed!", _moduleId);
-        }
-        else
-        {
-            Module.HandleStrike();
-            Debug.LogFormat("[Web Design #{0}] Answer incorrect! Strike!", _moduleId);
+            if (m == chk)
+            {
+                _isSolved = true;
+                Module.HandlePass();
+                Debug.LogFormat("[Web Design #{0}] Answer correct! Module passed!", _moduleId);
+            }
+            else
+            {
+                Module.HandleStrike();
+                Debug.LogFormat("[Web Design #{0}] Answer incorrect! Strike!", _moduleId);
+            }
         }
     }
 
