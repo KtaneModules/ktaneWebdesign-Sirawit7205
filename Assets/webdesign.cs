@@ -76,7 +76,7 @@ public class webdesign : MonoBehaviour {
         selectA = Random.Range(0, 8);
         selectB = Random.Range(0, 8);
         Debug.LogFormat("[Web Design #{0}] Site {1} was selected", _moduleId, sitename[selectA]);
-        Debug.LogFormat("[Web design #{0}] Threshold RGB value is #{1}{2}{3} (Or in Dec: {4} {5} {6})", _moduleId, thresR[selectA].ToString("X"), thresG[selectA].ToString("X"), thresB[selectA].ToString("X"), thresR[selectA], thresG[selectA], thresB[selectA]);
+        Debug.LogFormat("[Web design #{0}] Threshold RGB value is #{1}{2}{3} (Or in Dec: {4} {5} {6})", _moduleId, thresR[selectA].ToString("X2"), thresG[selectA].ToString("X2"), thresB[selectA].ToString("X2"), thresR[selectA], thresG[selectA], thresB[selectA]);
 
         lineCnt = Random.Range(3, 7);
         tempscreen = new string[lineCnt + 2];
@@ -234,7 +234,7 @@ public class webdesign : MonoBehaviour {
             tarR = colorR[sel];
             tarG = colorG[sel];
             tarB = colorB[sel];
-            Debug.LogFormat("[Web design #{0}] First color found (target) is {1}, with RGB value of #{2}{3}{4} (Or in Dec: {5} {6} {7})", _moduleId, randomcolor[sel], tarR.ToString("X"), tarG.ToString("X"), tarB.ToString("X"), tarR, tarG, tarB);
+            Debug.LogFormat("[Web design #{0}] First color found (target) is {1}, with RGB value of #{2}{3}{4} (Or in Dec: {5} {6} {7})", _moduleId, randomcolor[sel], tarR.ToString("X2"), tarG.ToString("X2"), tarB.ToString("X2"), tarR, tarG, tarB);
         }
     }
 
