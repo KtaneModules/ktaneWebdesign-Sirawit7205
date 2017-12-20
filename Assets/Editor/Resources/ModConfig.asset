@@ -13,5 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: webDesign
   title: Web Design
-  version: 1.1
+  description: "Rules of Web design: Never talk about Comic Sans MS, and color is
+    not colour.\r\n\r\nRequires Camera Zoom mod for a better view at the code, especially
+    when you use Double Decker mod.\r\n\r\nModule idea by theFIZZYnator.\r\n\r\nModule
+    ID: webDesign\r\n\r\nManual HTML: https://ktane.timwi.de/HTML/Web%20Design.html\r\nManual
+    PDF: https://ktane.timwi.de/PDF/Web%20Design.pdf"
+  version: 2.0
   outputFolder: build
+  previewImage: {fileID: 2800000, guid: 3354972033a8b124da62197d85889a1b, type: 3}
