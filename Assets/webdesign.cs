@@ -1,17 +1,27 @@
 ﻿using UnityEngine;
 using System.Linq;
+using Newtonsoft.Json;
 
-public class webdesign : MonoBehaviour {
+public class Webdesign : MonoBehaviour {
+
+    public class ModSettingsJSON
+    {
+        public bool enableColorblindMode;
+        public bool blackAndWhiteScreen;
+        public string note1;
+        public string note2;
+    }
 
     public KMAudio Audio;
     public KMBombModule Module;
     public KMSelectable[] btn;
+    public KMModSettings modSettings;
     public TextMesh text;
 
     private static int _moduleIdCounter = 1;
     private int _moduleId;
 
-    private string[,] selectors = new string[8, 8] {
+    private readonly string[,] selectors = new string[8, 8] {
         {"body.post","a#header","a.author","h3.post","h3#header",".post blockquote",".post #comments","#header h3"},
         {"div#msg","#msg","img#cover","#sidebar a","div#content .post","div.title","div.post","#content span.share"},
         {"div#fullview","#comments.large","img#main","img.large","#fullview div.username","div#main img","img#fullview","div#comments.large"},
@@ -22,9 +32,9 @@ public class webdesign : MonoBehaviour {
         {"body #content","body #sidebar","#content img.avatar","blockquote#sidebar","blockquote.reply","div.reply","div.avatar","img.reply"}
     };
 
-    private string[] sitename = { "Edison Daily", "Buddymaker", "PNGdrop", "BobIRS", "Vidhost", "Go Team Falcon online", "Stufflocker", "Steel Nexus" };
-    private string[] randomcolor = { "blue", "green", "purple", "yellow", "white", "magenta", "red", "orange", "gray" };
-    private string[] btnText = { "Accept", "Consider", "Reject" };
+    private readonly string[] sitename = { "Edison Daily", "Buddymaker", "PNGdrop", "BobIRS", "Vidhost", "Go Team Falcon online", "Stufflocker", "Steel Nexus" };
+    private readonly string[] randomcolor = { "blue", "green", "purple", "yellow", "white", "magenta", "red", "orange", "gray" };
+    private readonly string[] btnText = { "Accept", "Consider", "Reject" };
 
     private string[] colors = { "color: *;", "background: *;", "background-color: *;" };
     private string[] margin = { "margin: 0 auto;", "margin: 2px 4px;", "margin: 1em;", "margin: calc(100vw-640px);", "margin: 25%;", "margin: 80px 40px;", "margin: 4.2em 1.0em;", "margin: auto;", "padding: 4px;",
@@ -35,14 +45,14 @@ public class webdesign : MonoBehaviour {
         "font-family: \"Gotham\",\n  \"Proxima Nova\", sans-serif;", "font-family: \"Century\",\n  \"Georgia\", serif;", "font-family: \"Hoefler Text\",\n  \"Times New Roman\", serif;", "font-family: \"Avenir Next\",\n  \"Avenir\", sans-serif;" };
     private string[] shadow = { "box-shadow: none;", "text-shadow: none;", "text-shadow: *;", "box-shadow: 0px 2px 4px\n  *;", "box-shadow: 2px 3px 8px\n  *;", "box-shadow: 2px 2px 0px\n  * inset;", "text-shadow: 1px 2px 6px\n  *;", "text-shadow: -1px -4px 0px\n  *;", "text-shadow: 12px 14px 1px\n  *;" };
 
-    private int[] thresR = { 0, 128, 186, 3, 96, 80, 176, 190 }, thresG = { 255, 64, 218, 230, 6, 19, 32, 166 }, thresB = { 0, 192, 85, 30, 30, 55, 229, 30 };
-    private int[] colorR = { 0, 0, 128, 255, 255, 255, 255, 255, 128 }, colorG = { 0, 255, 0, 255, 255, 0, 0, 165, 128 }, colorB = { 255, 0, 128, 0, 255, 255, 0, 0, 128 };
+    private readonly int[] thresR = { 0, 128, 186, 3, 96, 80, 176, 190 }, thresG = { 255, 64, 218, 230, 6, 19, 32, 166 }, thresB = { 0, 192, 85, 30, 30, 55, 229, 30 };
+    private readonly int[] colorR = { 0, 0, 128, 255, 255, 255, 255, 255, 128 }, colorG = { 0, 255, 0, 255, 255, 0, 0, 165, 128 }, colorB = { 255, 0, 128, 0, 255, 255, 0, 0, 128 };
 
     private string screen = "";
     private string[] tempscreen;
-    private int[] dbg = new int[5];
+    private readonly int[] dbg = new int[5];
     private int lineCnt, selectA, selectB, ans = 0, finalans, chk, tarR = 127, tarG = 127, tarB = 127, zidx = 0;
-    private bool useColor = false, pos = false, _isSolved = false, _lightsOn = false;
+    private bool useColor = false, pos = false, _isSolved = false, _lightsOn = false, isColorBlind = false, isScreenBWMode = false;
 
     void Start ()
     {
@@ -54,17 +64,17 @@ public class webdesign : MonoBehaviour {
     {
 		btn[0].OnInteract += delegate ()
 		{
-			ansChk(0);
+			AnsChk(0);
 			return false;
 		};
 		btn[1].OnInteract += delegate ()
 		{
-			ansChk(1);
+			AnsChk(1);
 			return false;
 		};
 		btn[2].OnInteract += delegate ()
 		{
-			ansChk(2);
+			AnsChk(2);
 			return false;
 		};
     }
@@ -72,6 +82,17 @@ public class webdesign : MonoBehaviour {
     void Init()
     {
         int feature, subfeature, temp = 0;
+
+        //check for color blind mode first!
+        isColorBlind = ColorBlindCheck();
+        isScreenBWMode = ScreenBWModeCheck();
+
+        //change screen color
+        if (isScreenBWMode)
+        {
+            Debug.LogFormat("[Web Design #{0}] Running the screen in black and white mode.", _moduleId);
+            text.color = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+        }
 
         selectA = Random.Range(0, 8);
         selectB = Random.Range(0, 8);
@@ -93,7 +114,7 @@ public class webdesign : MonoBehaviour {
             {
                 subfeature = Random.Range(0, colors.Length);
                 tempscreen[i] = colors[subfeature];
-                colorSelector(i);
+                ColorSelector(i);
             }
             else if(feature == 2)
             {
@@ -106,7 +127,7 @@ public class webdesign : MonoBehaviour {
             {
                 subfeature = Random.Range(0, border.Length);
                 tempscreen[i] = border[subfeature];
-                if (subfeature >= 3 && subfeature <= 7) colorSelector(i);
+                if (subfeature >= 3 && subfeature <= 7) ColorSelector(i);
                 if (subfeature > 2)
                 {
                     ans++;
@@ -138,7 +159,7 @@ public class webdesign : MonoBehaviour {
             {
                 subfeature = Random.Range(0, shadow.Length);
                 tempscreen[i] = shadow[subfeature];
-                if (subfeature > 1) colorSelector(i);
+                if (subfeature > 1) ColorSelector(i);
                 if (subfeature > 1)
                 {
                     ans += 2;
@@ -187,14 +208,13 @@ public class webdesign : MonoBehaviour {
         if (Random.Range(0, 2) == 1)
         {
             ans *= 2;
-            btn[0].GetComponent<MeshRenderer>().material.color = new Color32(0x50, 0xF7, 0x36, 0xFF);
-            btn[1].GetComponent<MeshRenderer>().material.color = new Color32(0xF7, 0xA4, 0x20, 0xFF);
-            btn[2].GetComponent<MeshRenderer>().material.color = new Color32(0xEF, 0x2D, 0x2D, 0xFF);
+            SetButtonColor(true);
             Debug.LogFormat("[Web design #{0}] ->  Colored buttons: score x2", _moduleId);
         }
         else
         {
             ans -= 3;
+            SetButtonColor(false);
             Debug.LogFormat("[Web design #{0}] ->  Gray buttons: score -3", _moduleId);
         }
 
@@ -224,7 +244,7 @@ public class webdesign : MonoBehaviour {
         _lightsOn = true;
     }
 
-    void colorSelector(int idx)
+    void ColorSelector(int idx)
     {
         int sel = Random.Range(0, 9);
         tempscreen[idx] = tempscreen[idx].Replace("*", randomcolor[sel]);
@@ -238,7 +258,79 @@ public class webdesign : MonoBehaviour {
         }
     }
 
-    void ansChk(int m)
+    void SetButtonColor(bool hasColor)
+    {
+        if(isColorBlind)
+        {
+            Debug.LogFormat("[Web design #{0}] Colorblind mode enabled, showing buttons in black and white mode.", _moduleId);
+
+            //black on white
+            if (hasColor)
+            {
+                for(int i=0;i<3;i++)
+                {
+                    btn[i].GetComponent<MeshRenderer>().material.color = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+                    btn[i].GetComponentInChildren<TextMesh>().color = new Color32(0x00, 0x00, 0x00, 0xFF);
+                }
+            }
+
+            //white on black
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    btn[i].GetComponent<MeshRenderer>().material.color = new Color32(0x00, 0x00, 0x00, 0xFF);
+                    btn[i].GetComponentInChildren<TextMesh>().color = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
+                }
+            }
+        }
+        else
+        {
+            //only color condition, no color is already on the model
+            if(hasColor)
+            {
+                btn[0].GetComponent<MeshRenderer>().material.color = new Color32(0x50, 0xF7, 0x36, 0xFF);
+                btn[1].GetComponent<MeshRenderer>().material.color = new Color32(0xF7, 0xA4, 0x20, 0xFF);
+                btn[2].GetComponent<MeshRenderer>().material.color = new Color32(0xEF, 0x2D, 0x2D, 0xFF);
+            }
+        }
+    }
+
+    bool ColorBlindCheck()
+    {
+        try
+        {
+            ModSettingsJSON settings = JsonConvert.DeserializeObject<ModSettingsJSON>(modSettings.Settings);
+            if (settings != null)
+                return settings.enableColorblindMode;
+            else
+                return false;
+        }
+        catch (JsonReaderException e)
+        {
+            Debug.LogFormat("[Web design #{0}] JSON reading failed with error {1}, assuming colorblind mode is disabled.", _moduleId, e.Message);
+            return false;
+        }
+    }
+
+    bool ScreenBWModeCheck()
+    {
+        try
+        {
+            ModSettingsJSON settings = JsonConvert.DeserializeObject<ModSettingsJSON>(modSettings.Settings);
+            if (settings != null)
+                return settings.blackAndWhiteScreen;
+            else
+                return false;
+        }
+        catch (JsonReaderException e)
+        {
+            Debug.LogFormat("[Web Design #{0}] JSON reading failed with error {1}, assuming screen color is default.", _moduleId, e.Message);
+            return false;
+        }
+    }
+
+    void AnsChk(int m)
     {
         Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, btn[m].transform);
         btn[m].AddInteractionPunch();
