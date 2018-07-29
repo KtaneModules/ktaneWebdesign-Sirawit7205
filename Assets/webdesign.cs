@@ -352,6 +352,10 @@ public class Webdesign : MonoBehaviour {
         }
     }
 
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Accept with “!{0} acc”. Consider with “!{0} con”. Reject with “!{0} rej”.";
+#pragma warning restore 414
+
     KMSelectable[] ProcessTwitchCommand(string command)
     {
         switch(command.ToLowerInvariant().Trim())
