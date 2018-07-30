@@ -1,21 +1,11 @@
 ﻿using UnityEngine;
 using System.Linq;
-using Newtonsoft.Json;
 
 public class Webdesign : MonoBehaviour {
-
-    public class ModSettingsJSON
-    {
-        public bool enableColorblindMode;
-        public bool blackAndWhiteScreen;
-        public string note1;
-        public string note2;
-    }
 
     public KMAudio Audio;
     public KMBombModule Module;
     public KMSelectable[] btn;
-    public KMModSettings modSettings;
     public TextMesh text;
 
     private static int _moduleIdCounter = 1;
@@ -52,7 +42,7 @@ public class Webdesign : MonoBehaviour {
     private string[] tempscreen;
     private readonly int[] dbg = new int[5];
     private int lineCnt, selectA, selectB, ans = 0, finalans, chk, tarR = 127, tarG = 127, tarB = 127, zidx = 0;
-    private bool useColor = false, pos = false, _isSolved = false, _lightsOn = false, isColorBlind = false, isScreenBWMode = false;
+    private bool useColor = false, pos = false, _isSolved = false, _lightsOn = false, isColorblind = false;
 
     void Start ()
     {
@@ -84,11 +74,10 @@ public class Webdesign : MonoBehaviour {
         int feature, subfeature, temp = 0;
 
         //check for color blind mode first!
-        isColorBlind = ColorBlindCheck();
-        isScreenBWMode = ScreenBWModeCheck();
+        isColorblind = GetComponent<KMColorblindMode>().ColorblindModeActive;
 
         //change screen color
-        if (isScreenBWMode)
+        if (isColorblind)
         {
             Debug.LogFormat("[Web Design #{0}] Running the screen in black and white mode.", _moduleId);
             text.color = new Color32(0xFF, 0xFF, 0xFF, 0xFF);
@@ -260,7 +249,7 @@ public class Webdesign : MonoBehaviour {
 
     void SetButtonColor(bool hasColor)
     {
-        if(isColorBlind)
+        if(isColorblind)
         {
             Debug.LogFormat("[Web design #{0}] Colorblind mode enabled, showing buttons in black and white mode.", _moduleId);
 
@@ -293,40 +282,6 @@ public class Webdesign : MonoBehaviour {
                 btn[1].GetComponent<MeshRenderer>().material.color = new Color32(0xF7, 0xA4, 0x20, 0xFF);
                 btn[2].GetComponent<MeshRenderer>().material.color = new Color32(0xEF, 0x2D, 0x2D, 0xFF);
             }
-        }
-    }
-
-    bool ColorBlindCheck()
-    {
-        try
-        {
-            ModSettingsJSON settings = JsonConvert.DeserializeObject<ModSettingsJSON>(modSettings.Settings);
-            if (settings != null)
-                return settings.enableColorblindMode;
-            else
-                return false;
-        }
-        catch (JsonReaderException e)
-        {
-            Debug.LogFormat("[Web design #{0}] JSON reading failed with error {1}, assuming colorblind mode is disabled.", _moduleId, e.Message);
-            return false;
-        }
-    }
-
-    bool ScreenBWModeCheck()
-    {
-        try
-        {
-            ModSettingsJSON settings = JsonConvert.DeserializeObject<ModSettingsJSON>(modSettings.Settings);
-            if (settings != null)
-                return settings.blackAndWhiteScreen;
-            else
-                return false;
-        }
-        catch (JsonReaderException e)
-        {
-            Debug.LogFormat("[Web Design #{0}] JSON reading failed with error {1}, assuming screen color is default.", _moduleId, e.Message);
-            return false;
         }
     }
 

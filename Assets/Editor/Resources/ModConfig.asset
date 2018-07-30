@@ -17,7 +17,10 @@ MonoBehaviour:
     not colour.\r\n\r\nRequires Camera Zoom mod for a better view at the code, especially
     when you use Double Decker mod.\r\n\r\nModule idea by theFIZZYnator.\r\n\r\nModule
     ID: webDesign\r\n\r\nManual HTML: https://ktane.timwi.de/HTML/Web%20Design.html\r\nManual
-    PDF: https://ktane.timwi.de/PDF/Web%20Design.pdf\n\nThe Inconsolata font is licensed
+    PDF: https://ktane.timwi.de/PDF/Web%20Design.pdf\n\nThis module has a colorblind
+    mode. In this mode, black texts over white buttons are considered as color buttons,
+    and white texts over black buttons are considered as gray buttons. Also, the screen
+    color of this module will be black and white.\n\nThe Inconsolata font is licensed
     under the SIL Open Font License, Version 1.1."
   version: 2.0
   outputFolder: build

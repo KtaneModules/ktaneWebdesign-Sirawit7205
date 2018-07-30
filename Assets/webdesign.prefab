@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 114000011775072228}
   - component: {fileID: 114000014132172668}
   - component: {fileID: 114000012323254468}
-  - component: {fileID: 114592021718186136}
+  - component: {fileID: 114946354367852492}
   m_Layer: 0
   m_Name: webdesign
   m_TagString: Untagged
@@ -1233,7 +1233,6 @@ MonoBehaviour:
   - {fileID: 114000012231318922}
   - {fileID: 114000012058678866}
   - {fileID: 114000010384542316}
-  modSettings: {fileID: 114592021718186136}
   text: {fileID: 102000013538475100}
 --- !u!114 &114000012511961996
 MonoBehaviour:
@@ -1321,7 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: -1675560866, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114592021718186136
+--- !u!114 &114946354367852492
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1329,11 +1328,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000013619333350}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -289456416, guid: 45b809be76fd7a3468b6f517bced6f28, type: 3}
+  m_Script: {fileID: 11500000, guid: c1cfb889a07d5fd4e9baed7960bb397f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Settings: "{ \t \t \t\"enableColorblindMode\": false, \t\"blackAndWhiteScreen\":
-    false, \t\"note1\": \"Set enableColorblindMode to true to make the buttons run
-    in black and white mode.\", \t\"note2\": \"Set blackAndWhiteScreen to true to
-    change the screen text color from green to white.\" }"
-  SettingsPath: 
+  _colorblindMode: 0

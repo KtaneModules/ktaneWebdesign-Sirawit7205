@@ -1,6 +1,0 @@
-{ 	 	
-	"enableColorblindMode": false,
-	"blackAndWhiteScreen": false,
-	"note1": "Set enableColorblindMode to true to make the buttons run in black and white mode.",
-	"note2": "Set blackAndWhiteScreen to true to change the screen text color from green to white."
-}
