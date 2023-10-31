@@ -27,13 +27,16 @@ public class Webdesign : MonoBehaviour {
     private readonly string[] btnText = { "Accept", "Consider", "Reject" };
 
     private string[] colors = { "color: *;", "background: *;", "background-color: *;" };
-    private string[] margin = { "margin: 0 auto;", "margin: 2px 4px;", "margin: 1em;", "margin: calc(100vw-640px);", "margin: 25%;", "margin: 80px 40px;", "margin: 4.2em 1.0em;", "margin: auto;", "padding: 4px;",
-        "padding: 2px 8px;", "padding: 0;", "padding: calc(100%-64px);", "padding: 32px;" };
-    private string[] border = { "border: 0px;", "border-radius: 0px;", "border-radius: 50%;", "border: 4px solid *;", "border: 1px dashed\n  *;", "border-left: 2px solid\n  *;", "border-bottom: 1px dotted\n  *;", "border-right: 1px solid\n  *;", "border-radius: 2px;", "border-radius: 4px;", "border-radius: 20px;" };
-    private string[] position = { "position: absolute;", "position: relative;", "position: fixed;", "z-index: 2;", "z-index: 10;", "z-index: 1048576;", "z-index: 9999999999;" };
+    private string[] margin = { "margin: 0 auto;", "margin: 2px 4px;", "margin: 1em;", "margin: calc(100vw-640px);", "margin: 25%;", "margin: 80px 40px;", "margin: 4.2em 1.0em;", "margin: auto;", 
+		"padding: 4px;", "padding: 2px 8px;", "padding: 0;", "padding: calc(100%-64px);", "padding: 32px;" };
+    private string[] border = { "border: 0px;", "border-radius: 0px;", "border-radius: 50%;", "border: 4px solid *;", "border: 1px dashed\n  *;", 
+		"border: 10px ridge\n  *;", "border: 1px dotted\n  *;", "border: 5px groove\n  *;", "border-radius: 2px;", "border-radius: 4px;", "border-radius: 20px;" };
+    private string[] position = { "position: absolute;", "position: relative;", "position: fixed;", 
+		"z-index: 2;", "z-index: 10;", "z-index: 1048576;", "z-index: 9999999999;" };
     private string[] fonts = { "font-family: \"Comic Sans MS\";", "font-family: \"Special Elite\",\n  monospace;", "font-family: \"Futura\",\n  monospace;", "font-family: \"BombIcons\";", "font-family: \"Helvetica\",\n  sans-serif;",
         "font-family: \"Gotham\",\n  \"Proxima Nova\", sans-serif;", "font-family: \"Century\",\n  \"Georgia\", serif;", "font-family: \"Hoefler Text\",\n  \"Times New Roman\", serif;", "font-family: \"Avenir Next\",\n  \"Avenir\", sans-serif;" };
-    private string[] shadow = { "box-shadow: none;", "text-shadow: none;", "text-shadow: *;", "box-shadow: 0px 2px 4px\n  *;", "box-shadow: 2px 3px 8px\n  *;", "box-shadow: 2px 2px 0px\n  * inset;", "text-shadow: 1px 2px 6px\n  *;", "text-shadow: -1px -4px 0px\n  *;", "text-shadow: 12px 14px 1px\n  *;" };
+    private string[] shadow = { "box-shadow: none;", "text-shadow: none;", "text-shadow: *;", "box-shadow: 0px 2px 4px\n  *;", "box-shadow: 2px 3px 8px\n  *;", 
+		"box-shadow: 2px 2px 0px\n  * inset;", "text-shadow: 1px 2px 6px\n  *;", "text-shadow: -1px -4px 0px\n  *;", "text-shadow: 12px 14px 1px\n  *;" };
 
     private readonly int[] thresR = { 0, 128, 186, 3, 96, 80, 176, 190 }, thresG = { 255, 64, 218, 230, 6, 19, 32, 166 }, thresB = { 0, 192, 85, 30, 30, 55, 229, 30 };
     private readonly int[] colorR = { 0, 0, 128, 255, 255, 255, 255, 255, 128 }, colorG = { 0, 255, 0, 255, 255, 0, 0, 165, 128 }, colorB = { 255, 0, 128, 0, 255, 255, 0, 0, 128 };

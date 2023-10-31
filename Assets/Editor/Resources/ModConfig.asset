@@ -23,6 +23,6 @@ MonoBehaviour:
     and white texts over black buttons are considered as gray buttons. Also, the screen
     color of this module will be black and white.\n\nThe Inconsolata font is licensed
     under the SIL Open Font License, Version 1.1."
-  version: 2.1
+  version: 2.2
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 3354972033a8b124da62197d85889a1b, type: 3}
